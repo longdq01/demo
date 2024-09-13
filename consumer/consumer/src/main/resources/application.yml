@@ -1,0 +1,20 @@
+env: dev
+
+spring:
+  application:
+    name: consumer
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    time-zone: Asia/Ho_Chi_Minh
+
+server:
+  port: 8084
+
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: admin
+  password: admin123
+  payment-queue: payment-queue
+  payment-exchange: payment-exchange
+  payment-routing-key: payment-rk

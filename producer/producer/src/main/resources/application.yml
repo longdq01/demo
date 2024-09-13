@@ -1,0 +1,28 @@
+env: dev
+
+spring:
+  application:
+    name: producer
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    time-zone: Asia/Ho_Chi_Minh
+
+server:
+  port: 8083
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  max-idle: 5
+  max-active: 10
+  min-idle: 2
+  max-wait: 1000
+
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: admin
+  password: admin123
+  payment-queue: payment-queue
+  payment-exchange: payment-exchange
+  payment-routing-key: payment-rk

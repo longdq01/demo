@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: demo-rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin123
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - D:\workspace\volumes\rabbitmq:/var/lib/rabbitmq
+  redis:
+    image: redis:latest
+    container_name: demo-redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - D:\workspace\volumes\redis:/data
+  mysql:
+    image: mysql:8.0.13
+    container_name: demo-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123456
+      MYSQL_DATABASE: payment
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123456
+    ports:
+      - '3306:3306'
+    volumes:
+      - D:\workspace\volumes\mysql:/var/lib/mysql
