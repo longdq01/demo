@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void createPayment(CreatePaymentReqDTO createPaymentReqDTO) {
         log.info("[PaymentServiceImpl - createPayment] create payment with reqDto: {}", createPaymentReqDTO);
         validatePaymentData(createPaymentReqDTO);
-        Object response = rabbitmqService.sendCorrelationMessage(rabbitmqConfig.getPaymentExchange(),
+        String response = rabbitmqService.sendCorrelationMessage(rabbitmqConfig.getPaymentExchange(),
                 rabbitmqConfig.getPaymentRoutingKey(),
                 createPaymentReqDTO);
         cacheTokenKey(createPaymentReqDTO.getTokenKey());

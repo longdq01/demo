@@ -1,5 +1,6 @@
 package com.example.consumer.service;
 
+import com.rabbitmq.client.MessageProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -11,8 +12,8 @@ import java.util.UUID;
 @Service
 public class PaymentService {
     @RabbitListener(queues = "${rabbitmq.payment-queue}")
-    public Object processPaymentRequest(@Payload String message) {
+    public String processPaymentRequest(@Payload String message) {
         log.info(message);
-        return UUID.randomUUID().toString();
+        return "Abc";
     }
 }
