@@ -50,6 +50,7 @@ public class RabbitmqConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate();
         rabbitTemplate.setConnectionFactory(pooledChannelConnectionFactory());
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setReplyTimeout(30000);
         return rabbitTemplate;
     }
 }

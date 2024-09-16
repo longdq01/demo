@@ -1,7 +1,8 @@
 package com.example.producer.service;
 
-import com.example.producer.model.CreatePaymentReqDTO;
+import com.example.producer.model.BaseResponse;
+import com.example.producer.model.dto.CreatePaymentReqDTO;
 
 public interface PaymentService {
-    public void createPayment(CreatePaymentReqDTO createPaymentReqDTO);
+    BaseResponse createPayment(CreatePaymentReqDTO createPaymentReqDTO);
 }

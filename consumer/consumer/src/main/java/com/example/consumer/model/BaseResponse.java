@@ -1,14 +1,10 @@
-package com.example.producer.model;
+package com.example.consumer.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class BaseResponse {
     private int code;
     private String message;

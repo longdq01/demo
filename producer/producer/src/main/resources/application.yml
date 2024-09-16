@@ -23,6 +23,6 @@ rabbitmq:
   port: 5672
   username: admin
   password: admin123
-  payment-queue: payment-queue
-  payment-exchange: payment-exchange
-  payment-routing-key: payment-rk
+  payment-queue: queue.payment
+  payment-exchange: exchange.payment
+  payment-routing-key: rk.payment

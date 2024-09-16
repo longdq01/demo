@@ -1,6 +1,6 @@
-package com.example.producer.exception;
+package com.example.consumer.exception;
 
-import com.example.producer.config.CodeResponse;
+import com.example.consumer.config.CodeResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

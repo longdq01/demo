@@ -2,7 +2,7 @@ package com.example.producer.controller;
 
 
 import com.example.producer.model.BaseResponse;
-import com.example.producer.model.CreatePaymentReqDTO;
+import com.example.producer.model.dto.CreatePaymentReqDTO;
 import com.example.producer.service.PaymentService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +24,7 @@ public class PaymentController {
 
     @PostMapping
     public ResponseEntity<BaseResponse> createPayment(@Valid @RequestBody CreatePaymentReqDTO createPaymentReqDTO) {
-        paymentService.createPayment(createPaymentReqDTO);
-
-        return ResponseEntity.ok(
-                BaseResponse.builder()
-                        .code(HttpsURLConnection.HTTP_OK)
-                        .message("Success")
-                        .data(createPaymentReqDTO)
-                        .build()
-        );
+        BaseResponse response = paymentService.createPayment(createPaymentReqDTO);
+        return ResponseEntity.ok(response);
     }
 }

@@ -6,6 +6,15 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
     time-zone: Asia/Ho_Chi_Minh
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: false
 
 server:
   port: 8084
@@ -15,6 +24,15 @@ rabbitmq:
   port: 5672
   username: admin
   password: admin123
-  payment-queue: payment-queue
-  payment-exchange: payment-exchange
-  payment-routing-key: payment-rk
+  payment-queue: queue.payment
+  payment-exchange: exchange.payment
+  payment-routing-key: rk.payment
+
+mysql:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/payment
+  username: admin
+  password: admin123456
+
+api:
+  xpartner: https://api.foodbook.vn/ipos/ws/xpartner/callback/vnpay

@@ -1,8 +1,7 @@
-package com.example.producer.exception;
+package com.example.consumer.exception;
 
-import com.example.producer.config.CodeResponse;
-import com.example.producer.config.Config;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.consumer.config.CodeResponse;
+import com.example.consumer.config.Config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Objects;
