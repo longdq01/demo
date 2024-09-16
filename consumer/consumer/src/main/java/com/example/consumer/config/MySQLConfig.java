@@ -2,7 +2,6 @@ package com.example.consumer.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +14,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 @Data
@@ -28,6 +26,13 @@ public class MySQLConfig {
     private String username;
     private String password;
 
+    private int maxPoolSize;
+    private int timeout;
+    private int minIdle;
+    private int maxLifetime;
+    private int idleTimeout;
+
+
     @Bean
     public DataSource hikariDataSource() {
         HikariDataSource dataSource = DataSourceBuilder.create()
@@ -37,12 +42,11 @@ public class MySQLConfig {
                 .username(username)
                 .password(password)
                 .build();
-        dataSource.setMaximumPoolSize(10);
-        dataSource.setConnectionTimeout(20000);
-        dataSource.setMinimumIdle(5);
-        dataSource.setIdleTimeout(300000);
-        dataSource.setMaxLifetime(1800000);
-
+        dataSource.setMaximumPoolSize(maxPoolSize);
+        dataSource.setConnectionTimeout(timeout);
+        dataSource.setMinimumIdle(minIdle);
+        dataSource.setIdleTimeout(maxLifetime);
+        dataSource.setMaxLifetime(idleTimeout);
         return dataSource;
     }
 

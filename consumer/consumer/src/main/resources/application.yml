@@ -33,6 +33,11 @@ mysql:
   url: jdbc:mysql://localhost:3306/payment
   username: admin
   password: admin123456
+  max-pool-size: 10
+  timeout: 20000
+  min-idle: 5
+  idle-timeout: 300000
+  max-lifetime: 1800000
 
 api:
   xpartner: https://api.foodbook.vn/ipos/ws/xpartner/callback/vnpay
