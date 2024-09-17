@@ -26,6 +26,7 @@ public class RabbitmqConfig {
     private String paymentQueue;
     private String paymentExchange;
     private String paymentRoutingKey;
+    private String replyQueue;
 
     @Bean
     public Declarables declarables(){
@@ -68,6 +69,6 @@ public class RabbitmqConfig {
 
     @Bean
     public Queue replyQueue() {
-        return new Queue("my.reply.queue");
+        return new Queue(replyQueue);
     }
 }

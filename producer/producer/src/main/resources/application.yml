@@ -26,3 +26,4 @@ rabbitmq:
   payment-queue: queue.payment
   payment-exchange: exchange.payment
   payment-routing-key: rk.payment
+  reply-queue: queue.reply
