@@ -1,8 +1,13 @@
 package com.example.consumer.config;
 
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import io.netty.channel.ChannelFactory;
 import lombok.Data;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Declarables;
 import org.springframework.amqp.core.DirectExchange;
@@ -44,7 +49,16 @@ public class RabbitmqConfig {
         connectionFactory.setPort(port);
         connectionFactory.setUsername(username);
         connectionFactory.setPassword(password);
-        return new PooledChannelConnectionFactory(connectionFactory);
+        PooledChannelConnectionFactory pcf = new PooledChannelConnectionFactory(connectionFactory);
+        pcf.setPoolConfigurer((pool, tx) -> {
+            if (tx) {
+                // configure the transactional pool
+            }
+            else {
+                // configure the non-transactional pool
+            }
+        });
+        return pcf;
     }
 
     @Bean
