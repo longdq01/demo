@@ -2,14 +2,14 @@ package com.example.producer.repository.rabbitmq;
 
 import com.example.producer.exception.ApiException;
 import com.example.producer.utils.JsonUtils;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-@Slf4j
+@Log4j2
 @Service
 public class RabbitmqService {
     @Autowired

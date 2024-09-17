@@ -57,7 +57,6 @@ public class RabbitmqConfig {
         return rabbitTemplate;
     }
 
-    // example create reply queue
     @Bean
     public SimpleMessageListenerContainer replyListenerContainer() {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();

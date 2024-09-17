@@ -3,6 +3,7 @@ package com.example.producer.exception;
 import com.example.producer.config.CodeResponse;
 import com.example.producer.config.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Objects;
 
-@Slf4j
+@Log4j2
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired

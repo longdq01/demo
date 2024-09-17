@@ -1,8 +1,6 @@
 package com.example.consumer.service;
 
-import com.example.consumer.config.CodeResponse;
 import com.example.consumer.config.Config;
-import com.example.consumer.exception.ApiException;
 import com.example.consumer.model.BaseResponse;
 import com.example.consumer.model.ModelMapper;
 import com.example.consumer.model.dto.CreatePaymentReqDTO;
@@ -36,13 +34,13 @@ public class PaymentService {
         log.info("[PaymentService - processPaymentRequest] received message: {}", message);
         CreatePaymentReqDTO createPaymentReqDTO = JsonUtils.parseJson(message, CreatePaymentReqDTO.class);
         log.info("[PaymentService - processPaymentRequest] paymentDTO: {}", createPaymentReqDTO);
-        if (paymentRepository.existsById(createPaymentReqDTO.getOrderCode())) {
-            return JsonUtils.stringifyJson(BaseResponse.builder()
-                    .code(CodeResponse.EXIST.getCode())
-                    .message("payment is existed")
-                    .data(null)
-                    .build());
-        }
+//        if (paymentRepository.existsById(createPaymentReqDTO.getOrderCode())) {
+//            return JsonUtils.stringifyJson(BaseResponse.builder()
+//                    .code(CodeResponse.EXIST.getCode())
+//                    .message("payment is existed")
+//                    .data(null)
+//                    .build());
+//        }
         paymentRepository.save(ModelMapper.paymentDTOToPaymentEntity(createPaymentReqDTO));
 
         RestClient.ResponseSpec responseSpec = restClient.post()
