@@ -2,9 +2,7 @@ package com.example.producer.exception;
 
 import com.example.producer.config.CodeResponse;
 import com.example.producer.config.Config;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Objects;
@@ -30,10 +27,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ErrorResponse> handleApiException(ApiException err, WebRequest request) {
         String message = (err.getMessage() != null) ? err.getMessage() : err.getCode().getMessage();
-        log.error("[GlobalExceptionHandler - handleApiException] error: {}, code: {}", message, err.getCode().code);
         ErrorResponse errorResponse = new ErrorResponse(err.getCode().code, message);
 
-        if(config.getEnv().equals("dev") && isTraceOn(request)){
+        if (config.getEnv().equals("dev") && isTraceOn(request)) {
             errorResponse.setStackTrace(getStackTrace(err));
         }
         return ResponseEntity.status(err.getCode().code).body(errorResponse);
@@ -44,15 +40,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-        log.error("[GlobalExceptionHandler - handleMethodArgumentNotValid] error: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(CodeResponse.ERR_INVALID_DATA.code, CodeResponse.ERR_INVALID_DATA.getMessage());
-        if(config.getEnv().equals("dev")){
+        if (config.getEnv().equals("dev")) {
             errorResponse.setDevMessage(ex.getMessage());
-            if(isTraceOn(request)){
+            if (isTraceOn(request)) {
                 errorResponse.setStackTrace(getStackTrace(ex));
             }
         }
-        for (FieldError fieldError: ex.getBindingResult().getFieldErrors()) {
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(),
                     fieldError.getDefaultMessage());
         }
@@ -60,12 +55,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleAllUncaughtException(Exception err, WebRequest request){
-        log.error("[GlobalExceptionHandler - handleAllUncaughtException] error: {}", err.getMessage());
+    public ResponseEntity<ErrorResponse> handleAllUncaughtException(Exception err, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(CodeResponse.INTERNAL.code, CodeResponse.INTERNAL.getMessage());
-        if(config.getEnv().equals("dev")){
+        if (config.getEnv().equals("dev")) {
             errorResponse.setDevMessage(err.getMessage());
-            if(isTraceOn(request)){
+            if (isTraceOn(request)) {
                 errorResponse.setStackTrace(getStackTrace(err));
             }
         }
@@ -73,13 +67,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private boolean isTraceOn(WebRequest request) {
-        String [] value = request.getParameterValues("trace");
+        String[] value = request.getParameterValues("trace");
         return Objects.nonNull(value)
                 && value.length > 0
                 && value[0].contentEquals("true");
     }
 
-    private String getStackTrace(Exception err){
+    private String getStackTrace(Exception err) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         err.printStackTrace(pw);

@@ -1,11 +1,9 @@
-package com.example.consumer.model;
+package com.example.producer.model.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
-public class BaseResponse {
+public class CreatePaymentResDTO {
     private int code;
     private String message;
     private String tokenKey;

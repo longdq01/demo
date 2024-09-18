@@ -9,4 +9,7 @@ import org.springframework.stereotype.Component;
 public class Config {
     @Value("${env}")
     private String env;
+
+    @Value("${service.api-id}")
+    private String serviceId;
 }

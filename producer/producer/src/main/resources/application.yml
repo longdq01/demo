@@ -27,3 +27,5 @@ rabbitmq:
   payment-exchange: exchange.payment
   payment-routing-key: rk.payment
   reply-queue: queue.reply
+
+service.api-id: restpayment

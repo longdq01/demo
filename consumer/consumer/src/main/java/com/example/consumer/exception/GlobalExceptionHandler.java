@@ -27,7 +27,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ErrorResponse> handleApiException(ApiException err, WebRequest request) {
         String message = (err.getMessage() != null) ? err.getMessage() : err.getCode().getMessage();
-        log.error("[GlobalExceptionHandler - handleApiException] error: {}, code: {}", message, err.getCode().code);
         ErrorResponse errorResponse = new ErrorResponse(err.getCode().code, message);
 
         if(config.getEnv().equals("dev") && isTraceOn(request)){
@@ -41,7 +40,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-        log.error("[GlobalExceptionHandler - handleMethodArgumentNotValid] error: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(CodeResponse.ERR_INVALID_DATA.code, CodeResponse.ERR_INVALID_DATA.getMessage());
         if(config.getEnv().equals("dev")){
             errorResponse.setDevMessage(ex.getMessage());
@@ -58,7 +56,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllUncaughtException(Exception err, WebRequest request){
-        log.error("[GlobalExceptionHandler - handleAllUncaughtException] error: {}", err.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(CodeResponse.INTERNAL.code, CodeResponse.INTERNAL.getMessage());
         if(config.getEnv().equals("dev")){
             errorResponse.setDevMessage(err.getMessage());
